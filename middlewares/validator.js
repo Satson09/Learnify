@@ -1,4 +1,5 @@
 const { check, validationResult } = require('express-validator');
+// Validates the user input for name, email, and password using express-validator
 
 exports.validateUser = [
   check('name')
