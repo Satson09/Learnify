@@ -5,6 +5,7 @@ const Quize = new mongoose.Schema({
   title: { type: String, required: true },
   questions: { type: Map, of: String, required: true },
 },
-{ timestamps: true });
+{ timestamps: true },
+{ versionKey: false });
 
 export default mongoose.model('Quize', Quize);

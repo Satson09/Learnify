@@ -5,6 +5,7 @@ const Contents = new mongoose.Schema({
   path: { type: String, required: true },
   type: { type: Number, required: true },
 },
-{ timestamps: true });
+{ timestamps: true },
+{ versionKey: false });
 
 export default mongoose.model('Contents', Contents);

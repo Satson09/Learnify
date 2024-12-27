@@ -8,6 +8,7 @@ const Enrollments = new mongoose.Schema({
   instructorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
   progress: { type: Number, required: true },
 },
-{ timestamps: true });
+{ timestamps: true },
+{ versionKey: false });
 
 export default mongoose.model('Enrollments', Enrollments);

@@ -7,6 +7,7 @@ const Course = new mongoose.Schema({
   difficulty: { type: String, required: true },
   instructorId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 },
-{ timestamps: true });
+{ timestamps: true },
+{ versionKey: false });
 
 export default mongoose.model('Course', Course);

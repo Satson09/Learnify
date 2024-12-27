@@ -5,6 +5,7 @@ const Grade = new mongoose.Schema({
   quizId: { type: Schema.Types.ObjectId, ref: 'Quize', required: true },
   score: { type: Number, required: true },
 },
-{ timestamps: true });
+{ timestamps: true },
+{ versionKey: false });
 
 export default mongoose.model('Grade', Grade);
