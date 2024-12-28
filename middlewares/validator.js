@@ -1,6 +1,8 @@
 const { check, validationResult } = require('express-validator');
 // Validates the user input for name, email, and password using express-validator
 
+// express-validator will collect any validation errors in validationResult
+// the results are stored in an internal structure that is part of the request (req)
 exports.validateUser = [
   check('name')
     .trim()
@@ -30,5 +32,5 @@ exports.validate = (req, res, next) => {
   // gathering all the validation errors from the req & putting them into an array called error
   const error = validationResult(req).array();
   if (!error.length) return next();
-  res.status(400).json({ success: false, error: error[0].msg });
+  return res.status(400).json({ success: false, error: error[0].msg });
 };
