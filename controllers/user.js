@@ -1,5 +1,7 @@
 const User = require('../model/user');
 const { sendError} = require('../utils/helper');
+// Controller to create a new user
+
 exports.createUser = async (req, res) => {
   const { name, email, password } = req.body;
   const user = await User.findOne({ email });
