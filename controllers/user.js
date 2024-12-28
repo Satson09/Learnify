@@ -1,6 +1,5 @@
 const User = require('../model/user');
-const { sendError} = require('../utils/helper');
-// Controller to create a new user
+const { sendError } = require('../utils/helper');
 
 exports.createUser = async (req, res) => {
   const { name, email, password } = req.body;
