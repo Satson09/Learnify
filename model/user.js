@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   verified: { type: Boolean, default: false, required: true },
 }, { versionKey: false });
 
-userSchema.pre('save', async (next) => {
+userSchema.pre('save', async function hashPassword(next) {
   if (this.isModified('password')) {
     const hash = await bcrypt.hash(this.password, await bcrypt.genSalt());
     this.password = hash;
