@@ -4,23 +4,12 @@
 
 This project is a clone of the **Coursera** platform, designed to replicate the user interface and core features of the website. The project focuses on building an interactive and visually course platform similar to Coursera.
 
-### _Features:_
-- Homepage with a layout showcasing featured courses
-- Navigation bar with links to different course categories and profile settings
-- Course listing page with filters and sorting options
-- Course details page with description, instructor info, and user reviews
-- Interactive user interface with buttons, modals, and dropdowns
-- Fully responsive design that works across desktops, tablets, and mobile devices
-
----
 
 ## _Technologies Used_
 
 - ***HTML5***: Structure of the web pages.
 - ***CSS3***: Styling of the pages using Flexbox, Grid, transitions, and animations.
 - ***JavaScript***: Basic interactivity such as modals, sliders, and form validations (optional).
-- ***Font Awesome***: Icons for social sharing and navigation.
-
 ---
 
 ## _Installation_
@@ -32,10 +21,15 @@ This project is a clone of the **Coursera** platform, designed to replicate the 
 
 2. Navigate to the project folder:
     ```bash
-    cd coursera-clone
+    cd Learnify
     ```
 
-3. Open the `index.html` file in your browser to view the project.
+3. Run `app.js` file in your browser to view the project:
+    ```bash
+    node app.js
+    ```
+
+4. Once the server is running, open your browser and navigate to `http://localhost:3000` to interact with the app.
 
 ---
 
