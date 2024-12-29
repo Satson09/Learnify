@@ -20,7 +20,18 @@ async function updateGrad(ObjectId, updatedfile) {
   }
 }
 
+async function retriveGrad(options = {}) {
+  try {
+    const result = await Grad.find(options);
+    return result;
+  } catch (error) {
+    console.log('Error because of :', error);
+    return null;
+  }
+}
+
 export default {
   createGrad,
   updateGrad,
+  retriveGrad,
 };
