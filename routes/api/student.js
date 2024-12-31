@@ -14,7 +14,7 @@ router.post('/enroll', enrollCourse);
 // Get all enrolled courses
 router.get('/:userId/courses', getEnrolledCourses);
 
-// Update course progress
+// Update courses progress
 router.post('/progress', updateProgress);
 
 module.exports = router;
