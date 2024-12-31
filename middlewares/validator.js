@@ -1,6 +1,6 @@
 const { check, validationResult } = require('express-validator');
 
-// Validates the user input for creating a user
+// Validates user input for creating a user
 exports.validateUser = [
   check('name')
     .trim()
