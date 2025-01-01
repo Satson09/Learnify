@@ -10,11 +10,11 @@ async function createProgress(options = {}) {
   }
 }
 
-async function updProgress(ObjectId, score) {
+async function updProgress(ObjectId, options = {}) {
   try {
     const result = await progress.findByIdAndUpdate(
       ObjectId,
-      { progress: score },
+      options,
       { new: true },
     );
     return result;
@@ -24,7 +24,7 @@ async function updProgress(ObjectId, score) {
   }
 }
 
-async function delProgress(ObjectId) {
+async function delProgress(options) {
   try {
     const result = await progress.findByIdAndDelete(ObjectId);
     return result;
