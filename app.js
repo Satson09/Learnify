@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import userRouter from './routes/user.js';
+import Router from './routes/index.js';
 
 dotenv.config();
 mongoose.set('strictQuery', false);
@@ -9,7 +9,7 @@ const mongoDB = process.env.DB_URL;
 const app = express();
 
 app.use(express.json());
-app.use('/api/user/', userRouter);
+app.use('/api/user/', Router);
 
 const PORT = process.env.PORT || 4000;
 
