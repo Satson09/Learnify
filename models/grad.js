@@ -2,8 +2,9 @@ import mongoose, { Schema } from 'mongoose';
 
 const Grade = new mongoose.Schema({
   studentId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  quizId: { type: Schema.Types.ObjectId, ref: 'Quize', required: true },
-  score: { type: Number, required: true },
+  courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
+  quizeId: { type: Schema.Types.ObjectId, ref: 'Quize', required: true },
+  score: { type: Number, default: 0 },
 },
 { timestamps: true },
 { versionKey: false });
