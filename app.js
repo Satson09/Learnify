@@ -1,6 +1,6 @@
 #!/usr/bin/node
 /**
-// Set up an Express server and the user router
+// Set up an Express server and the user route
 require('./db');
 require('dotenv').config();
 const express = require('express');

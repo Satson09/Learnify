@@ -23,10 +23,10 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   avatar: { type: String, default: '' },
   verified: { type: Boolean, default: false, required: true },
-  role: { 
-    type: String, 
+  role: {
+    type: String,
     enum: ['instructor', 'student', 'admin'], // Define allowed roles
-    required: true 
+    required: true
   },
 }, { versionKey: false });
 
