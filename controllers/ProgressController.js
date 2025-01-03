@@ -1,7 +1,7 @@
 import quizOperation from '../utils/quizzesOp.js';
 import gradOperation from '../utils/gradOp.js';
 import progOperation from '../utils/progressOp.js';
-import { scoreCalculation, correctQuize } from '../utils/helper.js';
+import { scoreCalculation, correctQuize, sendError } from '../utils/helper.js';
 
 class ProgressController {
   /*
@@ -20,10 +20,11 @@ class ProgressController {
     }
 
     // retrive the progress collection
-    const prog = await progOperation.retriveProgress({ studentId, courseId });
-    if (!prog) {
+    const prog = await progOperation.retriveProgress({ studentId: studentId, courseId });
+    if (!prog || prog.length === 0) {
       return res.status(404).json({ error: 'user Progress not found in DB' });
     }
+    console.log(prog);
     return res.status(200).json({
       progress: prog[0].progress,
       totalQuizes: prog[0].totalQuizes,
@@ -34,14 +35,16 @@ class ProgressController {
   static async PostProg(req, res) {
     /* /sumbit-quize
     json
-      {
-        "studentId": "12345",
-        "courseId": "67890",
-        "quizId": "quiz01",
-        "answers": [
-          { "questionId": "answer"} => { "1": "C", '2': 'paris', '3': 'prgraming' }
-        ]
-      }
+    {
+      "studentId": "67770df0655492eb1c858f58",
+      "courseId": "6776ea1b3da2dc84595a5fee",
+      "quizeId": "6774446f8deee44c48d5880b",
+      "answers": [
+        { "questionId": "133", "answer": "A"},
+        { "questionId": "313", "answer": "A"},
+        { "questionId": "331", "answer": "A"}
+      ]
+    }
     */
     const { studentId, courseId, answers, quizeId } = req.body;
 
@@ -51,7 +54,6 @@ class ProgressController {
 
     // retrive quize from database to compare correct answers in DB with user answers
     const quiz = await quizOperation.retriveQuizes({ _id: quizeId });
-
     if (!quiz) {
       res.status(404).json({ error: 'Quize not found in DB' });
     }
@@ -66,47 +68,81 @@ class ProgressController {
     // calculate the final score of a single quize
     const gradOfQuize = (((numberCorrectAnswers * scorePerQuize) / 100) * 100);
 
-    // create a grad first based on the givin quize
-    const CreateGrade = await gradOperation.createGrad({ studentId, courseId, quizeId });
-    if (!CreateGrade) {
-      return res.status(404).json({ error: 'cannot insert new grade docs' });
-    }
+    const grad = await gradOperation.retriveGrad({ quizeId });
+    
+    let result;
+    let fullProgress;
 
-    // retrive grad collection based on the "quiz_id"
-    const grad = await gradOperation.retriveGrad({ quizeId: CreateGrade.quizeId });
+    if (grad && grad.length > 0) {
+      // If grade exists, update it
+      console.log('Updating existing grade');
+      result = await gradOperation.updateGrad(grad[0]._id, { score: gradOfQuize });
+      if (!result) {
+          return res.status(404).json({ error: 'Failed to update grade' });
+      }
+      // calculate progress of student after each sumbit using scoreCalculation function
+      fullProgress = scoreCalculation(grad, grad.length);
 
-    if (!grad) {
-      res.status(404).json({ error: 'Grad not found in DB' });
-    }
+    } else {
+      // create a grad first based on the givin quize
+      const CreateGrade = await gradOperation.createGrad({ studentId, courseId, quizeId });
+      if (!CreateGrade) {
+        return res.status(404).json({ error: 'cannot insert new grade docs' });
+      }
+  
+      result = await gradOperation.updateGrad(CreateGrade._id, { score: gradOfQuize });
+      if (!result) {
+        res.status(404).json({ error: 'Grad was not Found' });
+      }
 
-    // update the grad of the quize first we retrive it by "the value return from the retrive grading process"
-    // then update the score calculation
-    const result = await gradOperation.updateGrad(grad[0]._id, { score: gradOfQuize });
+      const retgrad = await gradOperation.retriveGrad({ _id: CreateGrade._id });
+      if (!retgrad) {
+        return sendError(res, 'cannot retrive grad docs');
+      }
 
-    if (!result) {
-      res.status(404).json({ error: 'Grad was not Found' });
+      // calculate progress of student after each sumbit using scoreCalculation function
+      fullProgress = scoreCalculation(retgrad, retgrad.length);
     }
 
     // retriving all the quizes of the userID ==> give us all the quizes for all of the course
     // to be specific to one course we use the courseId
+    // const allQuizes = await gradOperation.retriveGrad({ studentId, courseId });
+    // console.log("qqqqqqqqqqq:::", allQuizes);
+
+    // allQuizes it help to calculate total quizes and number of completedquize
     const allQuizes = await gradOperation.retriveGrad({ studentId, courseId });
 
-    // calculate progress of student after each sumbit using scoreCalculation function
-    const fullProgress = scoreCalculation(allQuizes, allQuizes.length);
-    // retrive a specific progress collection to update it
+    // retrive a specific progress collection
     const progResult = await progOperation.retriveProgress({ studentId, courseId });
-    if (!progResult) {
-      return res.status(404).json({ error: 'progress collection not found' });
-    }
 
-    // update the progress collection
-    const finalResult = await progOperation.updProgress(
-      progResult[0]._id,
-      { progress: fullProgress,
+    let finalResult;
+    
+    if (progResult && progResult.length > 0) {
+      // If progress exists, update it
+      console.log('Updating existing progress');
+      finalResult = await progOperation.updProgress(
+        progResult[0]._id,
+        { progress: fullProgress,
         totalQuizes: allQuizes.length,
         completedQuizes: allQuizes.length,
+      });
+      if (!finalResult) {
+          return res.status(404).json({ error: 'Failed to update grade' });
       }
-    );
+    } else {
+      const creatProg = await progOperation.createProgress({ studentId, courseId });
+      if (!creatProg) {
+        return sendError(res, "cannot create progress collection");
+      }
+      // update the progress collection
+      finalResult = await progOperation.updProgress(
+        creatProg._id,
+        { progress: fullProgress,
+          totalQuizes: allQuizes.length,
+          completedQuizes: allQuizes.length,
+        }
+      );
+    }
     if (!finalResult) {
       res.status(404).json({ error: 'cannot update progress collection' });
     }
