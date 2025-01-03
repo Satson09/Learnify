@@ -3,6 +3,7 @@ import Student from '../utils/userOp.js';
 import prog from '../utils/progressOp.js';
 import { sendError } from '../utils/helper.js';
 
+
 class StudentController {
   // Enroll in a course
   static async enrollCourse(req, res) {
@@ -72,6 +73,24 @@ class StudentController {
       console.error(err);
       return sendError(res, 'An error occurred while updating progress.');
     }
+  }
+
+  static async viewAllCourse(req, res) {
+    const { userId } = req.params;
+    if (!userId) {
+      return sendError(res, 'Missing UserId');
+    }
+    const allEnrolled = await Enrollment.retriveAllEnrollment({ userId });
+    console.log(allEnrolled[0].courseId);
+    if (!allEnrolled) {
+      return sendError(res, 'Cannot retrive all Enrollment');
+    }
+    const courses = await Enrollment.retriveAndPopulate({ userId });
+    console.log("asdf", courses);
+    return res.json({
+      sucess: true,
+      allCourses: courses,
+    });
   }
 }
 

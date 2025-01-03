@@ -130,6 +130,22 @@ class InstructorController {
       return sendError(res, 'Failed to fetch enrolled students', error);
     }
   }
-}
+
+  static async viewAllCourse(req, res) {
+    const { userId } = req.params;
+    if (!userId) {
+      return sendError(res, 'Missing UserId');
+    }
+    const AllCourses = await Course.searchCourse({ instructorId: userId });
+    console.log(AllCourses);
+    if (!AllCourses) {
+      return sendError(res, 'Cannot retrive all course');
+    }
+    return res.json({
+      sucess: true,
+      AllCourses: AllCourses,
+    });
+    }
+  }
 
 export default InstructorController;

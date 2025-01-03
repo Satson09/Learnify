@@ -19,4 +19,10 @@ router.get('/:userId/courses', StudentController.getEnrolledCourses);
 // Update course progress
 router.post('/sumbit-quize', ProgressController.PostProg);
 
+// view all courses "for dashboard"
+router.get('/:userId/dashboard', StudentController.viewAllCourse);
+
+// show your progress
+router.get('/course/:studentId/:courseId/progress', PrgressController.GetProg);
+
 export default router;
