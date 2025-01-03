@@ -8,6 +8,7 @@ const Quize = new mongoose.Schema({
       _id: false,
       questionId: { type: String, required: true },  // Unique identifier for each question
       questionText: { type: String, required: true },  // Question text
+      options: {type: [String], required: true},
       correctAnswer: { type: String, required: true },  // Correct answer
     },
   ],
