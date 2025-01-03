@@ -13,6 +13,9 @@ async function createContent(options = {}) {
 async function findContent(options = {}) {
   try {
     const result = await contents.find(options);
+    if (result.length === 0) {
+      return null;
+    }
     return result;
   } catch (error) {
     console.log('error is : ', error);

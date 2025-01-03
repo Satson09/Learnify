@@ -51,6 +51,9 @@ async function delQuize(ObjectId) {
 async function retriveQuizes(options = {}) {
   try {
     const result = await quizzes.find(options);
+    if (result.length === 0) {
+      return null;
+    }
     return result;
   } catch (error) {
     console.log('error is : ', error);

@@ -2,8 +2,8 @@ import progress from '../models/progress.js';
 
 async function createProgress(options = {}) {
   try {
-    const result = await progress.create(options);
-    return result;
+      const result = await progress.create(options);
+      return result;
   } catch (error) {
     console.log('Error is because of: ', error);
     return null;

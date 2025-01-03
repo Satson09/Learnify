@@ -9,6 +9,7 @@ export function correctQuize(objectOne, objectTwo) {
   // console.log('objectTwo', objectTwo);
   objectOne.forEach((key) => {
     const obTwoQuestion = objectTwo.find(item => item.questionId === key.questionId);
+    // console.log('asdfasfsaf', obTwoQuestion);
     if (key.questionId === obTwoQuestion.questionId) {
       if (key.correctAnswer === obTwoQuestion.answer) {
         correct += 1;
@@ -20,6 +21,7 @@ export function correctQuize(objectOne, objectTwo) {
 
 export function scoreCalculation(correctQuizes, totalQuizes) {
   // console.log('total length', totalQuizes);
+  // console.log('correct quizes', correctQuize);
   let suum = 0
   correctQuizes.forEach((key) => {
     suum += key.score; 

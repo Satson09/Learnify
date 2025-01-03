@@ -1,15 +1,18 @@
 import Enrollments from '../models/enrollments.js';
-import { searchUser } from './userOp.js';
 
 async function createEnrollment(options = {}) {
   try {
-    // to know if we want to create a studentId or instructorId
-    // const user = await searchUser()
-    const result = await Enrollments.create({
-      studentId: options.studentId,
-      courseId: options.courseId,
-      progress: options.progress,
-    });
+    const enrol = await retriveAllEnrollment(options);
+    // console.log(grad);
+    if (enrol && enrol !== 0) {
+      // console.log('grad retrive');
+      return enrol;
+    } else if (!enrol && enrol !== 0) {
+      // console.log('grad null');
+      return null;
+    }
+    // console.log('create grad');
+    const result = await Enrollments.create(options);
     return result;
   } catch (err) {
     console.log('Error becuase of :', err);
@@ -17,11 +20,14 @@ async function createEnrollment(options = {}) {
   }
 }
 
-async function retriveAllEnrollment(studentId) {
+async function retriveAllEnrollment(options = {}) {
   // instead of the student ID it should be the ID stored in the session to retrive it
   // courses either he is student or instructor
   try {
-    const result = await Enrollments.find(studentId);
+    const result = await Enrollments.find(options);
+    if (result.length === 0) {
+      return 0;
+    }
     return result;
   } catch (err) {
     console.log('Error is because of: ', err);
@@ -29,7 +35,20 @@ async function retriveAllEnrollment(studentId) {
   }
 }
 
+async function updateEnrollment(options = {}, updatedfield) {
+  // update a function based on the _ID
+  try {
+    // const objectid = new mongoose.Schema.Types.ObjectId(_id);
+    const result = await Enrollments.find(options, updatedfield, { new: true });
+    return result;
+  } catch (err) {
+    console.log('Error becuase of :', err);
+    return null;
+  }
+}
+
 export default {
   createEnrollment,
   retriveAllEnrollment,
+  updateEnrollment,
 };

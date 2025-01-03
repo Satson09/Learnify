@@ -12,11 +12,14 @@ async function createUser(options = {}) {
   }
 }
 
-async function retriveUser(ObjectId) {
+async function retriveUser(options = {}) {
   // retrive the user information,and he/she is found by his/her _id
   // return null if somthing went wrong
   try {
-    const result = await users.findById(ObjectId);
+    const result = await users.find(options);
+    if (result.length === 0) {
+      return null;
+    }
     return result;
   } catch (error) {
     console.log('Error is because of :', error);
