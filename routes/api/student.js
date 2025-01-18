@@ -1,24 +1,3 @@
-/**
-const express = require('express');
-const {
-  enrollCourse,
-  getEnrolledCourses,
-  updateProgress,
-} = require('../../controllers/studentcontrollers');
-
-const router = express.Router();
-
-// Enroll in a course
-router.post('/enroll', enrollCourse);
-
-// Get all enrolled courses
-router.get('/:userId/courses', getEnrolledCourses);
-
-// Update course progress
-router.post('/progress', updateProgress);
-
-module.exports = router;
-*/
 
 const express = require('express');
 const {
@@ -39,8 +18,8 @@ router.use(requireRole('student'));
 // Enroll in a course
 router.post('/enroll', enrollCourse);
 
-// Get all enrolled courses
-router.get('/:userId/courses', getEnrolledCourses);
+// Fetch enrolled courses
+router.get('/enrolled-courses', getEnrolledCourses);
 
 // Update course progress
 router.post('/progress', updateProgress);

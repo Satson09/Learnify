@@ -11,15 +11,22 @@
     <h1>Student Dashboard</h1>
     <button id="logout">Logout</button>
   </header>
-  
+
   <main>
     <h2>Available Courses</h2>
     <div id="availableCourses"></div>
-    
+
     <h2>Enrolled Courses</h2>
     <div id="enrolledCourses"></div>
   </main>
-  
+
+  <!-- Modal for course files preview (optional, can enhance UX) -->
+  <div id="modal" class="hidden">
+    <div id="modalContent"></div>
+    <button onclick="document.getElementById('modal').classList.add('hidden')">Close</button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
+

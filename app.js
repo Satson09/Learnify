@@ -30,17 +30,6 @@ app.get('*', (req, res) => {
   }
 });
 
-/**
-// Centralized error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Unhandled Error:', err.stack);
-  res.status(err.status || 500).json({
-    success: false,
-    message: err.message || 'Internal Server Error',
-  });
-});
-*/
-
 // Start the server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

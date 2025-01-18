@@ -64,12 +64,12 @@ exports.getAvailableCourses = async (req, res) => {
 
 /**
  * Get all enrolled courses for a student.
- * @param {Request} req - The request object containing the userId in params.
+ * @param {Request} req - The request object containing the userId from the token.
  * @param {Response} res - The response object returning the enrolled courses.
  */
 exports.getEnrolledCourses = async (req, res) => {
   try {
-    const userId = req.user.id; // Extract userId from token
+    const userId = req.user.id; // Extract userId from the token
 
     // Find the student's profile by userId
     const student = await Student.findOne({ userId }).populate('enrolledCourses');
@@ -79,13 +79,14 @@ exports.getEnrolledCourses = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      enrolledCourses: student.enrolledCourses,
+      courses: student.enrolledCourses,
     });
   } catch (error) {
     console.error('Error fetching enrolled courses:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch enrolled courses.' });
   }
 };
+
 
 /**
  * Update course progress for a student.

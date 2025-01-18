@@ -119,6 +119,7 @@ if (document.getElementById('loginFormElement')) {
   });
 }
 
+
 // Instructor Dashboard Logic
 if (document.body.contains(document.getElementById('createCourseForm'))) {
   document.getElementById('createCourseForm').addEventListener('submit', async (event) => {
@@ -126,21 +127,39 @@ if (document.body.contains(document.getElementById('createCourseForm'))) {
 
     const title = document.getElementById('courseTitle').value;
     const description = document.getElementById('courseDescription').value;
+    const duration = document.getElementById('courseDuration').value;
+    const files = document.getElementById('courseFiles').files; // File input for course files
+    const website = document.getElementById('courseWebsite')?.value || null; // External course URL
+
+    if (!title || !description || !duration) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('duration', duration);
+    formData.append('website', website);
+
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
 
     try {
       const response = await fetch(`${baseUrl}/api/instructor/course`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          title,
-          description,
-          duration: 10,
-          instructorId: localStorage.getItem('userId'),
-        }),
+        body: formData,
       });
+
+      if (!response.ok) {
+        const errorText = await response.text(); // Capture detailed error response
+        console.error('Error response:', errorText);
+        throw new Error('Failed to create course. Please check your input or try again later.');
+      }
 
       const data = await response.json();
       if (data.success) {
@@ -151,9 +170,11 @@ if (document.body.contains(document.getElementById('createCourseForm'))) {
       }
     } catch (error) {
       console.error('Error during course creation:', error);
+      alert(error.message || 'An unexpected error occurred.');
     }
   });
 
+  //fetch instructor course
   fetch(`${baseUrl}/api/instructor/courses`, {
     headers: { Authorization: `Bearer ${token}` },
   })
@@ -166,6 +187,25 @@ if (document.body.contains(document.getElementById('createCourseForm'))) {
             `<div>
               <h3>${course.title}</h3>
               <p>${course.description}</p>
+              <ul>
+                ${course.files
+                  .map(
+                    (file) =>
+                      `<li>
+                        ${
+                          file.type === 'application/pdf'
+                            ? `<a href="${file.url}" target="_blank">${file.name}</a>`
+                            : `<video controls width="300"><source src="${file.url}" type="${file.type}">Your browser does not support the video tag.</video>`
+                        }
+                      </li>`
+                  )
+                  .join('')}
+              </ul>
+              ${
+                course.website
+                  ? `<p><a href="${course.website}" target="_blank">Visit Course Website</a></p>`
+                  : ''
+              }
               <button onclick="deleteCourse('${course._id}')">Delete</button>
               <button onclick="updateCourse('${course._id}')">Update</button>
               <button onclick="viewEnrolledStudents('${course._id}')">View Enrolled Students</button>
@@ -176,141 +216,177 @@ if (document.body.contains(document.getElementById('createCourseForm'))) {
     .catch((error) => console.error('Error fetching courses:', error));
 }
 
-// Delete a course (Instructor)
-function deleteCourse(courseId) {
-  fetch(`${baseUrl}/api/instructor/course/${courseId}`, {
-    method: 'DELETE',
-    headers: { Authorization: `Bearer ${token}` },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        alert('Course deleted successfully!');
-        location.reload();
-      } else {
-        alert(data.message || 'Failed to delete course.');
-      }
-    })
-    .catch((error) => console.error('Error during course deletion:', error));
-}
-
-// Update a course (Instructor)
-window.updateCourse = async function updateCourse(courseId) {
-  const title = prompt("Enter the new course title:");
-  const description = prompt("Enter the new course description:");
-
-  if (!title || !description) {
-    alert("Both title and description are required!");
-    return;
-  }
-
-  try {
-    const response = await fetch(`${baseUrl}/api/instructor/course`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ courseId, title, description }),
-    });
-
-    const data = await response.json();
-    if (data.success) {
-      alert("Course updated successfully!");
-      location.reload();
-    } else {
-      alert(data.message || "Failed to update course.");
-    }
-  } catch (error) {
-    console.error("Error during course update:", error);
-    alert("An error occurred. Please try again.");
-  }
-};
 
 // Enroll in a course (Student)
-window.enrollCourse = async function enrollCourse(courseId) {
+async function enrollCourse(courseId) {
   try {
     const response = await fetch(`${baseUrl}/api/student/enroll`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ courseId }),
     });
 
     const data = await response.json();
     if (data.success) {
-      alert(data.message || "Enrolled successfully!");
+      alert('Successfully enrolled in course!');
       location.reload();
     } else {
-      alert(data.message || "Failed to enroll.");
+      alert(data.message || 'Failed to enroll.');
     }
   } catch (error) {
-    console.error("Error during enrollment:", error);
-    alert("An error occurred. Please try again.");
+    console.error('Error during course enrollment:', error);
   }
-};
+}
 
-// Fetch available courses (Student)
+// Fetch available courses
 if (document.getElementById('availableCourses')) {
   fetch(`${baseUrl}/api/student/courses`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { Authorization: `Bearer ${token}` },
   })
     .then((response) => response.json())
     .then((data) => {
       const availableCourses = document.getElementById('availableCourses');
       availableCourses.innerHTML = data.courses
         .map(
-          (course) => `
-            <div>
+          (course) =>
+            `<div>
               <h3>${course.title}</h3>
               <p>${course.description}</p>
               <button onclick="enrollCourse('${course._id}')">Enroll</button>
-            </div>
-          `
+            </div>`
         )
         .join('');
     })
     .catch((error) => console.error('Error fetching available courses:', error));
 }
 
-// View enrolled students for a course
-window.viewEnrolledStudents = async function viewEnrolledStudents(courseId) {
+// Fetch and display enrolled courses for students
+if (document.getElementById('enrolledCourses')) {
+  fetch(`${baseUrl}/api/student/enrolled-courses`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        const enrolledCourses = document.getElementById('enrolledCourses');
+        if (data.courses.length === 0) {
+          enrolledCourses.innerHTML = '<p>No enrolled courses yet. Enroll in a course to view it here.</p>';
+        } else {
+          enrolledCourses.innerHTML = data.courses
+            .map(
+              (course) =>
+                `<div class="course-card">
+                  <h3>${course.title}</h3>
+                  <p>${course.description}</p>
+                  ${
+                    course.website
+                      ? `<p><a href="${course.website}" target="_blank">Visit Course Website</a></p>`
+                      : ''
+                  }
+                  <ul>
+                    ${course.files
+                      .map(
+                        (file) =>
+                          `<li>
+                            ${
+                              file.type === 'application/pdf'
+                                ? `<a href="${file.url}" target="_blank">${file.name}</a>`
+                                : `<video controls width="300"><source src="${file.url}" type="${file.type}">Your browser does not support the video tag.</video>`
+                            }
+                          </li>`
+                      )
+                      .join('')}
+                  </ul>
+                </div>`
+            )
+            .join('');
+        }
+      } else {
+        console.error('Failed to fetch enrolled courses:', data.message);
+      }
+    })
+    .catch((error) => console.error('Error fetching enrolled courses:', error));
+}
+
+
+// View enrolled students (Instructor)
+async function viewEnrolledStudents(courseId) {
   try {
     const response = await fetch(`${baseUrl}/api/instructor/course/${courseId}/students`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     const data = await response.json();
     if (data.success) {
-      const modalContent = document.getElementById("modalContent");
-      const modal = document.getElementById("modal");
-
-      if (!modalContent || !modal) {
-        console.error("Modal elements not found in the DOM.");
-        alert("Unable to display enrolled students. Please contact the admin.");
-        return;
-      }
-
-      // Populate modal content
       const studentList = data.students
         .map((student) => `<li>${student.name} (${student.email})</li>`)
-        .join("");
-
-      modalContent.innerHTML = `<ul>${studentList}</ul>`;
-      modal.classList.remove("hidden"); // Show the modal
+        .join('');
+      alert(`Enrolled Students:\n${studentList}`);
     } else {
-      alert(data.message || "Failed to fetch enrolled students.");
+      alert(data.message || 'Failed to fetch enrolled students.');
     }
   } catch (error) {
-    console.error("Error fetching enrolled students:", error);
-    alert("An error occurred. Please try again.");
+    console.error('Error fetching enrolled students:', error);
   }
-};
+}
+
+// Update a course (Instructor)
+async function updateCourse(courseId) {
+  const title = prompt('Enter new title:');
+  const description = prompt('Enter new description:');
+  const duration = prompt('Enter new duration (in hours):');
+
+  if (!title || !description || !duration) return alert('All fields are required!');
+
+  try {
+    const response = await fetch(`${baseUrl}/api/instructor/course`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ courseId, title, description, duration }),
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      alert('Course updated successfully!');
+      location.reload();
+    } else {
+      alert(data.message || 'Failed to update course.');
+    }
+  } catch (error) {
+    console.error('Error during course update:', error);
+  }
+}
+
+// Delete a course (Instructor)
+async function deleteCourse(courseId) {
+  if (!confirm('Are you sure you want to delete this course?')) return;
+
+  try {
+    const response = await fetch(`${baseUrl}/api/instructor/course/${courseId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      alert('Course deleted successfully!');
+      location.reload();
+    } else {
+      alert(data.message || 'Failed to delete course.');
+    }
+  } catch (error) {
+    console.error('Error during course deletion:', error);
+  }
+}
 

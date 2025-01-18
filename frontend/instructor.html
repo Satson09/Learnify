@@ -24,18 +24,19 @@
       <label for="courseDuration">Duration (in hours):</label>
       <input type="number" id="courseDuration" required />
 
+      <label for="courseFiles">Upload Course Files:</label>
+      <input type="file" id="courseFiles" multiple /> <!-- Add this line -->
+
+      <label for="courseWebsite">External Course Website (optional):</label>
+      <input type="url" id="courseWebsite" placeholder="https://example.com" />
+
+
       <button type="submit">Create Course</button>
     </form>
 
     <h2>Your Courses</h2>
     <div id="instructorCourses"></div>
   </main>
-
-  <!-- Modal for displaying enrolled students -->
-  <div id="modal" class="hidden">
-    <div id="modalContent"></div>
-    <button onclick="document.getElementById('modal').classList.add('hidden')">Close</button>
-  </div>
 
   <script src="script.js"></script>
 </body>
