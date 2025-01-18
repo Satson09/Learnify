@@ -318,7 +318,6 @@ if (document.getElementById('enrolledCourses')) {
     .catch((error) => console.error('Error fetching enrolled courses:', error));
 }
 
-/**
 // View enrolled students (Instructor)
 async function viewEnrolledStudents(courseId) {
   try {
@@ -334,16 +333,18 @@ async function viewEnrolledStudents(courseId) {
       const studentList = data.students
         .map((student) => `<li>${student.name} (${student.email})</li>`)
         .join('');
-      alert(`Enrolled Students:\n${studentList}`);
+      alert(`Enrolled Students:\n${data.students.map((s) => s.name).join('\n')}`);
+      // Optionally, display the list on the page
     } else {
       alert(data.message || 'Failed to fetch enrolled students.');
     }
   } catch (error) {
     console.error('Error fetching enrolled students:', error);
+    alert("An error occurred. Please try again.");
   }
 }
-*/
 
+/**
 // View enrolled students (Instructor)
 async function viewEnrolledStudents(courseId) {
   try {
@@ -380,6 +381,7 @@ async function viewEnrolledStudents(courseId) {
     console.error('Error fetching enrolled students:', error);
   }
 }
+*/
 
 // Function to close the modal
 function closeModal() {
