@@ -69,18 +69,23 @@ if (document.getElementById('signupForm')) {
         body: JSON.stringify({ name, email, password, role: selectedRole }),
       });
 
-      const data = await response.json();
-      if (data.success) {
-        alert('Sign Up Successful! Please Login.');
-        showLogin();
-      } else {
-        alert(data.error || 'Sign Up Failed');
+      if (!response.ok) {
+        // Log the error response for debugging
+        const errorData = await response.json();
+        console.error('Sign Up Error:', errorData);
+        throw new Error(errorData.message || 'Sign Up Failed');
       }
+
+      const data = await response.json();
+      alert('Sign Up Successful! Please Login.');
+      showLogin();
     } catch (error) {
       console.error('Error during Sign Up:', error);
+      alert(error.message || 'Sign Up Failed');
     }
   });
 }
+
 
 // Handle Login Form Submission
 if (document.getElementById('loginFormElement')) {
@@ -313,7 +318,7 @@ if (document.getElementById('enrolledCourses')) {
     .catch((error) => console.error('Error fetching enrolled courses:', error));
 }
 
-
+/**
 // View enrolled students (Instructor)
 async function viewEnrolledStudents(courseId) {
   try {
@@ -337,6 +342,51 @@ async function viewEnrolledStudents(courseId) {
     console.error('Error fetching enrolled students:', error);
   }
 }
+*/
+
+// View enrolled students (Instructor)
+async function viewEnrolledStudents(courseId) {
+  try {
+    const response = await fetch(`${baseUrl}/api/instructor/course/${courseId}/students`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      const studentList = data.students
+        .map((student) => `<li>${student.name} (${student.email})</li>`)
+        .join('');
+
+      // Create modal content
+      const modalContent = `
+        <div id="enrolledStudentsModal" class="modal" style="display: block;">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Enrolled Students</h2>
+            <ul>${studentList}</ul>
+          </div>
+        </div>
+      `;
+
+      // Append modal content to the document body
+      document.body.insertAdjacentHTML('beforeend', modalContent);
+    } else {
+      alert(data.message || 'Failed to fetch enrolled students.');
+    }
+  } catch (error) {
+    console.error('Error fetching enrolled students:', error);
+  }
+}
+
+// Function to close the modal
+function closeModal() {
+  const modal = document.getElementById('enrolledStudentsModal');
+  modal.style.display = 'none';
+}
+
 
 // Update a course (Instructor)
 async function updateCourse(courseId) {

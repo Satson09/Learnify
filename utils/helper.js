@@ -17,7 +17,7 @@ exports.sendError = (res, message, statusCode = 500, error = null) => {
   res.status(statusCode).json({
     success: false,
     message, // Short client-facing error message
-    error: process.env.NODE_ENV === 'development' ? error?.message : undefined, // Optional detailed error in dev mode
+    detailedError: process.env.NODE_ENV === 'development' ? error?.message : undefined, // Detailed error in dev mode
     errorCode: error?.name || undefined, // Include error name if available
   });
 };

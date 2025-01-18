@@ -16,6 +16,9 @@ app.use(express.json());
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, 'frontend')));
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Set up API routes (these take precedence)
 app.use(process.env.USER_API_PREFIX || '/api/user', userRouter);
 app.use(process.env.STUDENT_API_PREFIX || '/api/student', studentRouter);
