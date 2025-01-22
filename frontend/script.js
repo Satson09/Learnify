@@ -333,7 +333,7 @@ async function viewEnrolledStudents(courseId) {
       const studentList = data.students
         .map((student) => `<li>${student.name} (${student.email})</li>`)
         .join('');
-      alert(`Enrolled Students:\n${data.students.map((s) => s.name).join('\n')}`);
+      alert(`Enrolled Students:\n${data.students.map((s) => `${s.name} (${s.email})`).join('\n')}`)
       // Optionally, display the list on the page
     } else {
       alert(data.message || 'Failed to fetch enrolled students.');
@@ -343,45 +343,6 @@ async function viewEnrolledStudents(courseId) {
     alert("An error occurred. Please try again.");
   }
 }
-
-/**
-// View enrolled students (Instructor)
-async function viewEnrolledStudents(courseId) {
-  try {
-    const response = await fetch(`${baseUrl}/api/instructor/course/${courseId}/students`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data = await response.json();
-    if (data.success) {
-      const studentList = data.students
-        .map((student) => `<li>${student.name} (${student.email})</li>`)
-        .join('');
-
-      // Create modal content
-      const modalContent = `
-        <div id="enrolledStudentsModal" class="modal" style="display: block;">
-          <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Enrolled Students</h2>
-            <ul>${studentList}</ul>
-          </div>
-        </div>
-      `;
-
-      // Append modal content to the document body
-      document.body.insertAdjacentHTML('beforeend', modalContent);
-    } else {
-      alert(data.message || 'Failed to fetch enrolled students.');
-    }
-  } catch (error) {
-    console.error('Error fetching enrolled students:', error);
-  }
-}
-*/
 
 // Function to close the modal
 function closeModal() {
