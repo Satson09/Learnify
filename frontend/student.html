@@ -7,23 +7,34 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Student Dashboard</h1>
-    <button id="logout">Logout</button>
+  <header class="main-header">
+    <div class="header-content">
+      <img src="path/to/logo.png" alt="Learnify Logo" class="logo">
+      <h1 class="site-title">Learnify</h1>
+    </div>
   </header>
 
-  <main>
-    <h2>Available Courses</h2>
-    <div id="availableCourses"></div>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#availableCourses">Available Courses</a></li>
+        <li><a href="#enrolledCourses">Enrolled Courses</a></li>
+      </ul>
+      <button id="logout">Logout</button>
+    </aside>
 
-    <h2>Enrolled Courses</h2>
-    <div id="enrolledCourses"></div>
-  </main>
+    <main class="content">
+      <header>
+        <h1>Student Dashboard</h1>
+      </header>
 
-  <!-- Modal for course files preview (optional, can enhance UX) -->
-  <div id="modal" class="hidden">
-    <div id="modalContent"></div>
-    <button onclick="document.getElementById('modal').classList.add('hidden')">Close</button>
+      <h2 id="availableCoursesHeader">Available Courses</h2>
+      <div id="availableCourses"></div>
+
+      <h2>Enrolled Courses</h2>
+      <div id="enrolledCourses"></div>
+    </main>
   </div>
 
   <script src="script.js"></script>

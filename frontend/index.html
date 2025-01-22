@@ -7,15 +7,24 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to Learnify</h1>
-
-    <!-- Role Selection -->
-    <div id="roleSelection">
-      <h2>Select Your Role</h2>
-      <button id="studentRole">Student</button>
-      <button id="instructorRole">Instructor</button>
+  <header class="main-header">
+    <div class="header-content">
+      <img src="path/to/logo.png" alt="Learnify Logo" class="logo">
+      <h1 class="site-title">Learnify</h1>
     </div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welcome to Learnify</h1>
+        <p>Your gateway to knowledge and growth. Learn anytime, anywhere.</p>
+        <div class="hero-buttons">
+          <button id="studentRole">Join as Student</button>
+          <button id="instructorRole">Join as Instructor</button>
+        </div>
+      </div>
+    </section>
 
     <!-- Sign Up Form -->
     <div id="signUpForm" class="hidden">
@@ -23,13 +32,13 @@
       <form id="signupForm">
         <label for="signupName">Name:</label>
         <input type="text" id="signupName" placeholder="Enter your name" required>
-        
+
         <label for="signupEmail">Email:</label>
         <input type="email" id="signupEmail" placeholder="Enter your email" required>
-        
+
         <label for="signupPassword">Password:</label>
         <input type="password" id="signupPassword" placeholder="Enter your password" required>
-        
+
         <button type="submit">Sign Up</button>
       </form>
       <button id="goToLogin">Already have an account? Login</button>
@@ -41,10 +50,10 @@
       <form id="loginFormElement">
         <label for="loginEmail">Email:</label>
         <input type="email" id="loginEmail" placeholder="Enter your email" required>
-        
+
         <label for="loginPassword">Password:</label>
         <input type="password" id="loginPassword" placeholder="Enter your password" required>
-        
+
         <button type="submit">Login</button>
       </form>
       <button id="goToSignUp">Don't have an account? Sign Up</button>
@@ -54,3 +63,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+

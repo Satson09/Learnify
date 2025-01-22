@@ -7,36 +7,52 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Instructor Dashboard</h1>
-    <button id="logout">Logout</button>
+  <header class="main-header">
+    <div class="header-content">
+      <img src="path/to/logo.png" alt="Learnify Logo" class="logo">
+      <h1 class="site-title">Learnify</h1>
+    </div>
   </header>
 
-  <main>
-    <h2>Create a New Course</h2>
-    <form id="createCourseForm">
-      <label for="courseTitle">Title:</label>
-      <input type="text" id="courseTitle" required />
+  <div class="dashboard">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#createCourseForm">Create a Course</a></li>
+        <li><a href="#instructorCourses">Your Courses</a></li>
+      </ul>
+      <button id="logout">Logout</button>
+    </aside>
 
-      <label for="courseDescription">Description:</label>
-      <textarea id="courseDescription" required></textarea>
+    <main class="content">
+      <header>
+        <h1>Instructor Dashboard</h1>
+      </header>
 
-      <label for="courseDuration">Duration (in hours):</label>
-      <input type="number" id="courseDuration" required />
+      <h2>Create a New Course</h2>
+      <form id="createCourseForm">
+        <label for="courseTitle">Title:</label>
+        <input type="text" id="courseTitle" required />
 
-      <label for="courseFiles">Upload Course Files:</label>
-      <input type="file" id="courseFiles" multiple /> <!-- Add this line -->
+        <label for="courseDescription">Description:</label>
+        <textarea id="courseDescription" required></textarea>
 
-      <label for="courseWebsite">External Course Website (optional):</label>
-      <input type="url" id="courseWebsite" placeholder="https://example.com" />
+        <label for="courseDuration">Duration (in hours):</label>
+        <input type="number" id="courseDuration" required />
 
+        <label for="courseFiles">Upload Course Files:</label>
+        <input type="file" id="courseFiles" multiple />
 
-      <button type="submit">Create Course</button>
-    </form>
+        <label for="courseWebsite">External Course Website (optional):</label>
+        <input type="url" id="courseWebsite" placeholder="https://example.com" />
 
-    <h2>Your Courses</h2>
-    <div id="instructorCourses"></div>
-  </main>
+        <button type="submit">Create Course</button>
+      </form>
+
+      <h2>Your Courses</h2>
+      <div id="instructorCourses"></div>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>
