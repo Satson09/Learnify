@@ -15,7 +15,7 @@ exports.createUser = async (req, res) => {
     if (existingUser) return sendError(res, 'This email already exists!');
 
     // Validate role (optional, if role is required)
-    const validRoles = ['user', 'admin', 'instructor', 'student']; // Example roles
+    const validRoles = ['user', 'admin', 'instructor', 'student']; // Example role
     if (role && !validRoles.includes(role)) {
       return sendError(res, 'Invalid role provided.');
     }
@@ -86,7 +86,6 @@ exports.loginUser = async (req, res) => {
     return res.status(500).json({ success: false, message: 'Error logging in user.', error: error.message });
   }
 };
-
 */
 
 
@@ -174,4 +173,3 @@ exports.loginUser = async (req, res) => {
     return sendError(res, 'Error logging in user.', 500, error);
   }
 };
-

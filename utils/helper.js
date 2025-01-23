@@ -5,6 +5,7 @@ exports.sendError = (res, error, status = 401) => {
   };
 */
 
+
 // Function to send a standardized error response
 exports.sendError = (res, message, statusCode = 500, error = null) => {
   // Log error details for debugging
@@ -21,4 +22,3 @@ exports.sendError = (res, message, statusCode = 500, error = null) => {
     errorCode: error?.name || undefined, // Include error name if available
   });
 };
-
