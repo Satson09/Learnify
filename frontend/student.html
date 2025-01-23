@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Meta Information -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+
+  <!-- Split CSS files -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <i class="fas fa-bars menu-icon" onclick="toggleSidebar()"></i>
+      <img src="logo/learnify logo.jpeg" alt="Learnify Logo" class="logo">
+      <h1 class="site-title">Learnify</h1>
+      <i class="fas fa-bars menu-icon" id="menuToggle"></i> <!-- Menu Icon -->
+    </div>
+  </header>
+
+  <div class="dashboard">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="#availableCourses"><i class="fas fa-book"></i> Available Courses</a></li>
+        <li><a href="#enrolledCourses"><i class="fas fa-graduation-cap"></i> Enrolled Courses</a></li>
+        <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
+        <li><i class="fas fa-cog"></i> <a href="#">Settings</a></li>
+        <li><i class="fas fa-sign-out-alt"></i> <button class="logout-btn" id="logout">Logout</button></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <header>
+        <h1>Student Dashboard</h1>
+      </header>
+
+      <h2 id="availableCoursesHeader">Available Courses</h2>
+      <div id="availableCourses"></div>
+
+      <h2>Enrolled Courses</h2>
+      <div id="enrolledCourses"></div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

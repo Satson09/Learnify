@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructor Dashboard</title>
+
+  <!-- Split CSS files -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <i class="fas fa-bars menu-icon" onclick="toggleSidebar()"></i>
+      <img src="logo/learnify logo.jpeg" alt="Learnify Logo" class="logo">
+      <h1 class="site-title">Learnify</h1>
+      <i class="fas fa-bars menu-icon" id="menuToggle"></i> <!-- Menu Icon -->
+    </div>
+  </header>
+
+  <div class="dashboard">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="#createCourseForm"><i class="fas fa-book"></i> Create a Course</a></li>
+        <li><a href="#instructorCourses"><i class="fas fa-book"></i> Your Courses</a></li>
+        <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
+        <li><i class="fas fa-cog"></i> <a href="#">Settings</a></li>
+        <li><i class="fas fa-sign-out-alt"></i> <button class="logout-btn" id="logout">Logout</button></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <header>
+        <h1>Instructor Dashboard</h1>
+      </header>
+
+      <h2>Create a New Course</h2>
+      <form id="createCourseForm">
+        <label for="courseTitle">Title:</label>
+        <input type="text" id="courseTitle" required />
+
+        <label for="courseDescription">Description:</label>
+        <textarea id="courseDescription" required></textarea>
+
+        <label for="courseDuration">Duration (in hours):</label>
+        <input type="number" id="courseDuration" required />
+
+        <label for="courseFiles">Upload Course Files:</label>
+        <input type="file" id="courseFiles" multiple />
+
+        <label for="courseWebsite">External Course Website (optional):</label>
+        <input type="url" id="courseWebsite" placeholder="https://example.com" />
+
+        <button type="submit">Create Course</button>
+      </form>
+
+      <h2>Your Courses</h2>
+      <div id="instructorCourses"></div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
