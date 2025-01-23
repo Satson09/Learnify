@@ -3,7 +3,7 @@
 require('./db');
 require('dotenv').config();
 const express = require('express');
-const path = require('path'); // Import path for handling file paths
+const path = require('path'); // Import path for handling file path
 const userRouter = require('./routes/api/user');
 const studentRouter = require('./routes/api/student');
 const instructorRouter = require('./routes/api/instructor');
