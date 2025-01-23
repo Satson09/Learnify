@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 
-// Mongoose Schema for User model
+// Mongoose Schema for User data model
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
