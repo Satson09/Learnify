@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learnify - Sign Up & Login</title>
+  <!-- Inclde split CSS files in the correct order -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <img src="logo/learnify logo.jpeg" alt="Learnify Logo" class="logo">
+      <h1 class="site-title">Learnify</h1>
+      <i class="fas fa-bars menu-icon" id="menuToggle"></i> <!-- Menu Icon -->
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welcome to Learnify</h1>
+        <p>Your gateway to knowledge and growth. Learn anytime, anywhere.</p>
+        <div class="hero-buttons">
+          <h2>Select Your Role</h2>
+          <button id="studentRole">Join as Student</button>
+          <button id="instructorRole">Join as Instructor</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sign Up Form -->
+    <div id="signUpForm" class="hidden">
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <label for="signupName">Name:</label>
+        <input type="text" id="signupName" placeholder="Enter your name" required>
+
+        <label for="signupEmail">Email:</label>
+        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+
+        <label for="signupPassword">Password:</label>
+        <input type="password" id="signupPassword" placeholder="Enter your password" required>
+
+        <button type="submit">Sign Up</button>
+      </form>
+      <button id="goToLogin">Already have an account? Login</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="hidden">
+      <h2>Login</h2>
+      <form id="loginFormElement">
+        <label for="loginEmail">Email:</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+        <button type="submit">Login</button>
+      </form>
+      <button id="goToSignUp">Don't have an account? Sign Up</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
