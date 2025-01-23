@@ -8,7 +8,7 @@ exports.sendError = (res, error, status = 401) => {
 
 // Function to send a standardized error response
 exports.sendError = (res, message, statusCode = 500, error = null) => {
-  // Log error details for debugging
+  // Log error detail for debugging
   if (error) {
     console.error(`Error: ${message}`);
     console.error(error.stack || error); // Log stack trace or error details
