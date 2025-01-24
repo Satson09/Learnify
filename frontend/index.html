@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learnify - Sign Up & Login</title>
+  <link rel="icon" href="logo/learnify_logo-removebg-preview.png" type="image/icon type">
   <!-- Inclde split CSS files in the correct order -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -14,6 +15,8 @@
       <i class="fas fa-bars menu-icon" id="menuToggle"></i> <!-- Menu Icon -->
       <img src="logo/learnify logo.jpeg" alt="Learnify Logo" class="logo">
       <h1 class="site-title">Learnify</h1>
+       <i class="fas fa-bars menu-icon" id="menuToggle"></i>  <!-- Menu Icon -->
+
     </div>
   </header>
 
@@ -24,11 +27,12 @@
         <p>Your gateway to knowledge and growth. Learn anytime, anywhere.</p>
 
         
-        <div class="hero-buttons">
-          <h2>Select Your Role</h2>
+        
 
           <!-- Role Selection -->
           <div id="roleSelection">
+            <div class="hero-buttons">
+          <h2>Select Your Role</h2>
            <button id="studentRole">Join as Student</button>
            <button id="instructorRole">Join as Instructor</button>
           </div>
@@ -38,7 +42,7 @@
   </div>
 
     <!-- Sign Up Form -->
-    <div id="signUpForm" class="hidden">
+    <div id="signUpForm" class="">
       <h2>Sign Up</h2>
       <form id="signupForm">
         <label for="signupName">Name:</label>
@@ -49,6 +53,7 @@
 
         <label for="signupPassword">Password:</label>
         <input type="password" id="signupPassword" placeholder="Enter your password" required>
+        <label for="signupPassword" id="passWarning"> Your Password must be alphanumerical and have atleast one symbol.</label>
 
         <button type="submit">Sign Up</button>
       </form>

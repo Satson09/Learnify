@@ -53,7 +53,7 @@ document.getElementById("menuToggle").addEventListener("click", () => {
 
 // Show Sign Up Form
 function showSignUp() {
-  document.getElementById('roleSelection').classList.add('hidden');
+  document.getElementById('roleSelection').classList.remove('hidden');
   document.getElementById('signUpForm').classList.remove('hidden');
   document.getElementById('loginForm').classList.add('hidden');
 }

@@ -1,345 +1,389 @@
 /* General Body Styling */
 body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9; /* Soft background color for a clean look */
-  color: #333; /* Neutral text color for readability */
-  text-align: center;
+	font-family: "Arial", sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f9f9f9; /* Soft background color for a clean look */
+	color: #333; /* Neutral text color for readability */
+	text-align: center;
 }
 
 /* Header Styling */
 h1 {
-  color: #4CAF50; /* Align with the button colors for consistency */
-  font-size: 2rem;
-  margin: 20px 0;
+	color: #4caf50; /* Align with the button colors for consistency */
+	font-size: 2rem;
+	margin: 20px 0;
 }
 
 /* Main Header Styling */
 .main-header {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border-bottom: 2px solid #ddd;
+	display: flex;
+	align-items: center;
+	padding: 10px 20px;
+	background-color: #4caf50;
+	color: white;
+	border-bottom: 2px solid #ddd;
 }
 
 /* Header Content Styling */
 .header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 20px;
 }
 
 /* Logo Styling */
 .logo {
-  width: 200px; /* Adjusted logo size */
-  height: auto;
-  margin-right: 50px; /* Space between logo and title */
+	width: 200px; /* Adjusted logo size */
+	height: auto;
+	margin-right: 50px; /* Space between logo and title */
 }
 
 /* Site Title Styling */
 .site-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  margin: 0;
+	font-family: "Poppins", sans-serif;
+	font-size: 2rem;
+	margin: 0;
 }
 
 /* Menu Icon Styling */
 .menu-icon {
-  font-size: 24px; /* Adjust icon size */
-  cursor: pointer; /* Pointer on hover */
-  margin-left: 5px; /* Push to the far right */
-  color: white; /* Match the header color */
-  display: block; /* Ensure it's a block element */
-  align-self: center; /* Vertically align in the header */
+	font-size: 24px; /* Adjust icon size */
+	cursor: pointer; /* Pointer on hover */
+	margin-left: 5px; /* Push to the far right */
+	color: white; /* Match the header color */
+	display: block; /* Ensure it's a block element */
+	align-self: center; /* Vertically align in the header */
 }
 
+#menuToggle {
+	margin-right: 5%;
+}
+
+#createCourseForm {
+	padding-left: 2cm;
+	padding-right: 2cm;
+}
 
 /* Containers and Forms */
-.login-container, form {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #fff; /* White background for contrast */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+.login-container,
+form {
+	max-width: 450px;
+	margin: 40px auto;
+	padding: 25px;
+	background-color: #fff; /* White background for contrast */
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
 }
 
 /* Form Inputs and Buttons */
-input, select, button, textarea {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+input,
+select,
+button,
+textarea {
+	width: 100%;
+	margin-bottom: 15px;
+	padding: 10px;
+	font-size: 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
 }
 
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+input:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+	border-color: #4caf50;
+	box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+#passWarning {
+	color: gray;
+	font-size: 3.5mm;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", serif;
 }
 
 /* Buttons */
 button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 10px;
-  transition: background-color 0.3s ease;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	cursor: pointer;
+	padding: 10px;
+	transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+	background-color: #45a049;
+}
+
+#studentRole:focus {
+	background-color: #45a049;
+	color: white;
+}
+
+#instructorRole:focus {
+	background-color: #45a049;
+	color: white;
+}
+
+.hidden {
+	visibility: hidden;
+	display: none;
+	max-height: 0;
+	max-width: 0;
 }
 
 button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+	background-color: #ccc;
+	cursor: not-allowed;
 }
 
 /* Headings and Text Alignment */
-h2, h3 {
-  color: #555;
-  font-size: 1.5rem;
-  margin: 10px 0;
+h2,
+h3 {
+	color: #555;
+	font-size: 1.5rem;
+	margin: 10px 0;
 }
 
 /* Sidebar Styling */
 .dashboard {
-  display: flex;
+	display: flex;
 }
 
 .dashboard.hidden {
-  display: none; /* Hide dashboard when the hidden class is applied */
+	display: none; /* Hide dashboard when the hidden class is applied */
 }
 
 .sidebar {
-  width: 180px;
-  background-color: #4CAF50;
-  color: white;
-  height: 100vh;
-  padding: 20px;
-  position: fixed;
+	width: 180px;
+	background-color: #4caf50;
+	color: white;
+	height: 100vh;
+	padding: 30px;
+	position: fixed;
 }
 
 .sidebar ul {
-  list-style: none;
-  padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .sidebar ul li {
-  display: flex; /* Align icon and text horizontally */
-  align-items: center;
-  margin: 15px 0; /* Add spacing between list items */
+	display: flex; /* Align icon and text horizontally */
+	align-items: center;
+	margin: 15px 0; /* Add spacing between list items */
 }
 
 .sidebar ul li i {
-  font-size: 18px; /* Adjust icon size */
-  margin-right: 10px; /* Space between icon and text */
+	font-size: 18px; /* Adjust icon size */
+	margin-right: 10px; /* Space between icon and text */
 }
 
 .sidebar ul li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1rem;
-  transition: 0.3s;
+	text-decoration: none;
+	color: white;
+	font-size: 1rem;
+	transition: 0.3s;
 }
 
 .sidebar ul li a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .sidebar .logout-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin-top: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  display: block;
-  text-align: center;
-  width: 100%;
-  transition: background-color 0.3s ease;
+	background-color: #f44336;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	font-size: 1rem;
+	display: block;
+	text-align: center;
+	width: 100%;
+	transition: background-color 0.3s ease;
 }
 
 .sidebar .logout-btn:hover {
-  background-color: #d32f2f;
+	background-color: #d32f2f;
 }
 
 .content {
-  margin-left: 270px;
-  padding: 20px;
+	margin-left: 270px;
+	padding: 20px;
 }
 
 .sidebar.hidden {
-  transform: translateX(-270px); /* Slide the sidebar out of view */
-  transition: transform 0.3s ease-in-out;
+	transform: translateX(-270px); /* Slide the sidebar out of view */
+	transition: transform 0.3s ease-in-out;
+	visibility: hidden;
+	display: none;
+	max-height: 0;
+	max-width: 0;
 }
 
 .content.sidebar-hidden {
-  margin-left: 0; /* Reset margin when sidebar is hidden */
-  transition: margin-left 0.3s ease-in-out;
+	margin: 0; /* Reset margin when sidebar is hidden */
+	width: 100%;
+	z-index: 1000;
+	transition: margin-left 0.3s ease-in-out;
 }
 
 /* Course Cards */
 .course-card {
-  display: inline-block;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 10px;
-  padding: 15px;
-  width: 280px;
-  text-align: left;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+	display: inline-block;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	margin: 10px;
+	padding: 15px;
+	width: 280px;
+	text-align: left;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+	transform: translateY(-5px);
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .course-card h3 {
-  color: #4CAF50;
-  font-size: 1.25rem;
-  margin-bottom: 10px;
+	color: #4caf50;
+	font-size: 1.25rem;
+	margin-bottom: 10px;
 }
 
 .course-card p {
-  color: #666;
-  font-size: 0.9rem;
-  line-height: 1.4;
+	color: #666;
+	font-size: 0.9rem;
+	line-height: 1.4;
 }
 
 .course-card button {
-  width: auto;
-  margin-top: 10px;
+	width: auto;
+	margin-top: 10px;
 }
 
 /* Modal Styling */
 #modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 500px;
-  z-index: 1000;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	width: 90%;
+	max-width: 500px;
+	z-index: 1000;
 }
 
 #modal.hidden {
-  display: none;
+	display: none;
 }
 
 #modalContent ul {
-  list-style-type: none;
-  padding: 0;
+	list-style-type: none;
+	padding: 0;
 }
 
 #modalContent li {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
 }
 
 #modalContent li:last-child {
-  border-bottom: none;
+	border-bottom: none;
 }
 
 #modal button {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 /* Overlay for Modal */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
 }
 
 .modal-overlay.hidden {
-  display: none;
+	display: none;
 }
 
 /* Hero Section */
 .hero {
-  background: url('path/to/hero-image.jpg') no-repeat center center/cover;
-  color: white;
-  text-align: center;
-  padding: 80px 20px;
+	background: url("path/to/hero-image.jpg") no-repeat center center/cover;
+	color: white;
+	text-align: center;
+	padding: 80px 20px;
 }
 
 .hero-content {
-  max-width: 800px;
-  margin: auto;
+	max-width: 800px;
+	margin: auto;
 }
 
 .hero h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+	font-size: 3rem;
+	margin-bottom: 20px;
 }
 
 .hero p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  color: #666; /* Dark grey for the tagline text */
+	font-size: 1.2rem;
+	margin-bottom: 30px;
+	color: #666; /* Dark grey for the tagline text */
 }
 
 .hero-buttons button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  margin: 10px;
-  background-color: white;
-  color: #4CAF50;
-  border: 2px solid white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
+	padding: 10px 20px;
+	font-size: 1rem;
+	margin: 10px;
+	background-color: white;
+	color: #4caf50;
+	border: 2px solid white;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
 }
 
 .hero-buttons button:hover {
-  background-color: #4CAF50;
-  color: white;
+	background-color: #4caf50;
+	color: white;
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
-  .login-container, form {
-    max-width: 90%;
-    padding: 15px;
-  }
+	.login-container,
+	form {
+		max-width: 90%;
+		padding: 15px;
+	}
 
-  .course-card {
-    width: 100%;
-  }
+	.course-card {
+		width: 100%;
+	}
 
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
+	.sidebar {
+		position: relative;
+		width: 100%;
+		height: auto;
+	}
 
-  .content {
-    margin-left: 0;
-  }
+	.content {
+		margin-left: 0;
+	}
 }
-
