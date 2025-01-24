@@ -22,3 +22,4 @@ exports.sendError = (res, message, statusCode = 500, error = null) => {
     errorCode: error?.name || undefined, // Include error name if available
   });
 };
+

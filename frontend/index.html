@@ -22,13 +22,20 @@
       <div class="hero-content">
         <h1>Welcome to Learnify</h1>
         <p>Your gateway to knowledge and growth. Learn anytime, anywhere.</p>
+
+        
         <div class="hero-buttons">
           <h2>Select Your Role</h2>
-          <button id="studentRole">Join as Student</button>
-          <button id="instructorRole">Join as Instructor</button>
+
+          <!-- Role Selection -->
+          <div id="roleSelection">
+           <button id="studentRole">Join as Student</button>
+           <button id="instructorRole">Join as Instructor</button>
+          </div>
         </div>
       </div>
     </section>
+  </div>
 
     <!-- Sign Up Form -->
     <div id="signUpForm" class="hidden">
@@ -45,6 +52,9 @@
 
         <button type="submit">Sign Up</button>
       </form>
+
+      <!-- Error Message Display -->
+      <div id="errorContainer" style="color: red; margin-top: 10px;"></div>
       <button id="goToLogin">Already have an account? Login</button>
     </div>
 

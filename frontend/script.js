@@ -1,3 +1,4 @@
+
 const baseUrl = 'http://localhost:3000'; // Backend base URL
 let selectedRole = ''; // Store selected role (Student/Instructor)
 
@@ -64,37 +65,51 @@ function showLogin() {
   document.getElementById('loginForm').classList.remove('hidden');
 }
 
-// Handle Sign Up Form Submission
-if (document.getElementById('signupForm')) {
-  document.getElementById('signupForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
 
-    const name = document.getElementById('signupName').value;
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
+// Handle Sign-Up Form Submission
+const signUpForm = document.getElementById('signupForm');
 
-    try {
-      const response = await fetch(`${baseUrl}/api/user/create`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, role: selectedRole }),
-      });
+if (signUpForm) {
+    signUpForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent form submission
 
-      if (!response.ok) {
-        // Log the error response for debugging
-        const errorData = await response.json();
-        console.error('Sign Up Error:', errorData);
-        throw new Error(errorData.message || 'Sign Up Failed');
-      }
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim();
+        const password = document.getElementById('signupPassword').value.trim();
 
-      const data = await response.json();
-      alert('Sign Up Successful! Please Login.');
-      showLogin();
-    } catch (error) {
-      console.error('Error during Sign Up:', error);
-      alert(error.message || 'Sign Up Failed');
-    }
-  });
+        if (!selectedRole) {
+            alert("Please select a role (Student or Instructor) before signing up.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${baseUrl}/api/user/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, password, role: selectedRole }),
+            });
+
+            if (!response.ok) {
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    const errorData = await response.json();
+                    alert(errorData.message || "Sign up failed.");
+                } else {
+                    alert("Unexpected error occurred. Please try again later.");
+                }
+                return;
+            }
+
+            const data = await response.json();
+            alert("Sign up successful! Please log in.");
+            window.location.href = "index.html";
+        } catch (error) {
+            alert("An error occurred. Please check your connection.");
+            console.error("Error during sign-up:", error);
+        }
+    });
 }
 
 
@@ -412,4 +427,3 @@ async function deleteCourse(courseId) {
     console.error('Error during course deletion:', error);
   }
 }
-
