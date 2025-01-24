@@ -13,7 +13,7 @@
     <div class="header-content">
       <img src="logo/learnify logo.jpeg" alt="Learnify Logo" class="logo">
       <h1 class="site-title">Learnify</h1>
-      <i class="fas fa-bars menu-icon" id="menuToggle"></i> <!-- Menu Icon -->
+       <i class="fas fa-bars menu-icon" id="menuToggle"></i>  <!-- Menu Icon -->
     </div>
   </header>
 
@@ -38,7 +38,7 @@
   </div>
 
     <!-- Sign Up Form -->
-    <div id="signUpForm" class="hidden">
+    <div id="signUpForm" class="">
       <h2>Sign Up</h2>
       <form id="signupForm">
         <label for="signupName">Name:</label>
@@ -49,6 +49,7 @@
 
         <label for="signupPassword">Password:</label>
         <input type="password" id="signupPassword" placeholder="Enter your password" required>
+        <label for="signupPassword" id="passWarning"> Your Password must be alphanumerical and have atleast one symbol.</label>
 
         <button type="submit">Sign Up</button>
       </form>
