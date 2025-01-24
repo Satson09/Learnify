@@ -1,1 +1,1 @@
-This is the
+This is the README for the frontend folder.
