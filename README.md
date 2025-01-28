@@ -138,12 +138,15 @@ Click "Enroll" to join a course.
 Access Course Materials:
 
 View the course materials and download any files provided by the instructor.
-Contributors
+
+Contributors: 
+
 Satson Johnson : [Backend]
 Email: satsunjohnson@gmail.com
 
 Tobenna Okeke : [Frontend]
 Email: tobeoke@gmail.com
+
 
 Future Enhancements
 Implement course ratings and reviews.
