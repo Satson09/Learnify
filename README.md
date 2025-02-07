@@ -148,9 +148,9 @@ Tobenna Okeke : [Frontend]
 Email: tobeoke@gmail.com
 
  ## Poject video link : 
- https://youtu.be/Lq1vUQbiN14?si=2MM2YXxZ-wvmhFJO
+ - https://youtu.be/Lq1vUQbiN14?si=2MM2YXxZ-wvmhFJO
 
-Future Enhancements
+## Future Enhancements :
 Implement course ratings and reviews.
 Add progress tracking and certificates for students.
 Integrate a payment gateway for paid courses.
